@@ -1,0 +1,7 @@
+*.ipynb
+*.pyc
+*.csv
+*.json
+*.jsonl
+*.jsonl.gz
+*.jsonl.gz.part
