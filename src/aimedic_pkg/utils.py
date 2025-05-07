@@ -3,7 +3,7 @@ import pandas as pd
 from tqdm.auto import tqdm
 import csv
 
-
+print("Bienvenido al script de anonimización de AIMEDIC")
 
 def split_csv_in_chunks(file_path, chunk_size):
     for chunk in pd.read_csv(
@@ -46,6 +46,17 @@ def upload_csv(file_path, api_key, chunk_size):
 
     return "".join([str(response.content) for response in responses])    
 
+
+def test_csv(file_path, api_key):
+    url = "https://anonymization-ia-gwhab3dsdwggffhp.canadacentral-01.azurewebsites.net/anonimizar_csv_con_reporte/"
+    #url = "http://localhost:8000/anonimizar_csv_con_reporte/"
+    headers = {"API-Key": api_key}
+    files = {"file": open(file_path, "rb")}
+
+    resp = requests.post(url, headers=headers, files=files)
+    resp.raise_for_status()
+    with open("anonimizado.zip", "wb") as f:
+        f.write(resp.content)
 
 
 if __name__ == "__main__":
